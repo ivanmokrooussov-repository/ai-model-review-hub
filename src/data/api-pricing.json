@@ -1,0 +1,176 @@
+{
+  "checked": "2026-11-25",
+  "note": "USD list prices per 1 million tokens, taken from the November 25, 2026 pricing guide. Edit the numbers here to update the API cost table. The long-form guide is a separate Markdown file.",
+  "models": [
+    {
+      "id": "gpt-5-nano",
+      "provider": "OpenAI",
+      "name": "gpt-5-nano",
+      "tier": "budget",
+      "inputPerMillion": 0.05,
+      "cachedInputPerMillion": 0.005,
+      "outputPerMillion": 0.4,
+      "notes": "Lowest published list rate among major US providers"
+    },
+    {
+      "id": "claude-haiku-5-5",
+      "provider": "Anthropic",
+      "name": "Claude Haiku 5.5 (<=100K)",
+      "tier": "budget",
+      "inputPerMillion": 0.1,
+      "cachedInputPerMillion": 0.01,
+      "outputPerMillion": 0.5,
+      "notes": "Prompts over 100K tokens rise to $0.50 in / $2.50 out"
+    },
+    {
+      "id": "gpt-4o-mini",
+      "provider": "OpenAI",
+      "name": "gpt-4o-mini",
+      "tier": "budget",
+      "inputPerMillion": 0.15,
+      "cachedInputPerMillion": 0.075,
+      "outputPerMillion": 0.6,
+      "notes": "Widely supported legacy budget tier"
+    },
+    {
+      "id": "deepseek-flash-offpeak",
+      "provider": "DeepSeek",
+      "name": "deepseek-flash (Off-Peak)",
+      "tier": "budget",
+      "inputPerMillion": 0.15,
+      "cachedInputPerMillion": 0.003,
+      "outputPerMillion": 0.6,
+      "notes": "Peak hours (01:00–04:00 and 06:00–10:00 UTC, Mon–Fri) double to $0.30 / $1.20"
+    },
+    {
+      "id": "gpt-5-4-nano",
+      "provider": "OpenAI",
+      "name": "gpt-5.4-nano",
+      "tier": "budget",
+      "inputPerMillion": 0.2,
+      "cachedInputPerMillion": 0.02,
+      "outputPerMillion": 1.25,
+      "notes": "Newer nano tier"
+    },
+    {
+      "id": "gpt-5-mini",
+      "provider": "OpenAI",
+      "name": "gpt-5-mini",
+      "tier": "budget",
+      "inputPerMillion": 0.25,
+      "cachedInputPerMillion": 0.025,
+      "outputPerMillion": 2,
+      "notes": "Strong price-to-capability mid-small option"
+    },
+    {
+      "id": "gemini-3-5-flash-lite",
+      "provider": "Google",
+      "name": "gemini-3.5-flash-lite",
+      "tier": "budget",
+      "inputPerMillion": 0.3,
+      "cachedInputPerMillion": 0.03,
+      "outputPerMillion": 2.5,
+      "notes": "Free API tier available with rate limits"
+    },
+    {
+      "id": "gemini-3-8-flash",
+      "provider": "Google",
+      "name": "gemini-3.8-flash",
+      "tier": "budget",
+      "inputPerMillion": 0.75,
+      "cachedInputPerMillion": null,
+      "outputPerMillion": 3.75,
+      "notes": "Promo rate through Dec 31, 2026; rises to $1.50 / $7.50 on Jan 1, 2027"
+    },
+    {
+      "id": "grok-build-0-1",
+      "provider": "xAI",
+      "name": "grok-build-0.1 (<200K)",
+      "tier": "budget",
+      "inputPerMillion": 1,
+      "cachedInputPerMillion": 0.2,
+      "outputPerMillion": 2,
+      "notes": "Prompts at or above 200K are billed at $2.00 in / $4.00 out for the whole request"
+    },
+    {
+      "id": "grok-4-3",
+      "provider": "xAI",
+      "name": "grok-4.3 (<200K)",
+      "tier": "flagship",
+      "inputPerMillion": 1.25,
+      "cachedInputPerMillion": 0.2,
+      "outputPerMillion": 2.5,
+      "notes": "1M context window; at or above 200K doubles to $2.50 / $5.00"
+    },
+    {
+      "id": "gpt-5",
+      "provider": "OpenAI",
+      "name": "gpt-5 / gpt-5.1",
+      "tier": "flagship",
+      "inputPerMillion": 1.25,
+      "cachedInputPerMillion": 0.125,
+      "outputPerMillion": 10,
+      "notes": "Standard flagship tier"
+    },
+    {
+      "id": "deepseek-v4-pro-peak",
+      "provider": "DeepSeek",
+      "name": "deepseek-v4-pro (Peak)",
+      "tier": "flagship",
+      "inputPerMillion": 1.32,
+      "cachedInputPerMillion": 0.044,
+      "outputPerMillion": 3.96,
+      "notes": "Off-peak drops 50% to $0.66 / $1.98"
+    },
+    {
+      "id": "gemini-4-hydrogen",
+      "provider": "Google",
+      "name": "gemini-4-hydrogen",
+      "tier": "flagship",
+      "inputPerMillion": 1.5,
+      "cachedInputPerMillion": 0.075,
+      "outputPerMillion": 7.5,
+      "notes": "1M context; free tier available"
+    },
+    {
+      "id": "grok-4-7",
+      "provider": "xAI",
+      "name": "grok-4.7 (<200K)",
+      "tier": "flagship",
+      "inputPerMillion": 2,
+      "cachedInputPerMillion": 0.5,
+      "outputPerMillion": 6,
+      "notes": "500K context; at or above 200K is $4.00 / $12.00; US endpoint +10%"
+    },
+    {
+      "id": "claude-sonnet-5-5",
+      "provider": "Anthropic",
+      "name": "Claude Sonnet 5.5",
+      "tier": "flagship",
+      "inputPerMillion": 2,
+      "cachedInputPerMillion": 0.1,
+      "outputPerMillion": 10,
+      "notes": "Standard Sonnet workhorse rate"
+    },
+    {
+      "id": "gemini-4-carbon",
+      "provider": "Google",
+      "name": "gemini-4-carbon / argon",
+      "tier": "flagship",
+      "inputPerMillion": 2,
+      "cachedInputPerMillion": 0.1,
+      "outputPerMillion": 10,
+      "notes": "Promo through Nov 30, 2026; rises to $4.00 / $20.00 on Dec 1, 2026"
+    },
+    {
+      "id": "claude-opus-5-5",
+      "provider": "Anthropic",
+      "name": "Claude Opus 5.5",
+      "tier": "flagship",
+      "inputPerMillion": 4,
+      "cachedInputPerMillion": 0.2,
+      "outputPerMillion": 20,
+      "notes": "Top standard Opus tier"
+    }
+  ]
+}

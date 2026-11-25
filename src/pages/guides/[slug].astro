@@ -1,0 +1,98 @@
+---
+import { render } from 'astro:content';
+import DisclosureBanner from '../../components/DisclosureBanner.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import Base from '../../layouts/Base.astro';
+import { siteName } from '../../config';
+import { formatDate, toIsoDate } from '../../lib/format';
+import { getGuides, guidePath, relatedGuides } from '../../lib/guides';
+
+export async function getStaticPaths() {
+  const guides = await getGuides();
+  return guides.map((guide) => {
+    if (guide.id !== guide.data.slug) {
+      throw new Error(
+        `The file content/guides/${guide.id}.md uses slug "${guide.data.slug}". Use the same words for the file name and the slug.`,
+      );
+    }
+    return { params: { slug: guide.data.slug }, props: { guide } };
+  });
+}
+
+const { guide } = Astro.props;
+const { Content } = await render(guide);
+const guides = await getGuides();
+const related = relatedGuides(guides, guide.data.slug);
+const path = guidePath(guide.data.slug);
+const published = toIsoDate(guide.data.date);
+const pageUrl = new URL(path, Astro.site).href;
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: guide.data.title,
+    description: guide.data.summary,
+    datePublished: published,
+    dateModified: published,
+    mainEntityOfPage: pageUrl,
+    articleSection: guide.data.category,
+    author: { '@type': 'Organization', name: siteName },
+    publisher: { '@type': 'Organization', name: siteName },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', Astro.site).href },
+      { '@type': 'ListItem', position: 2, name: 'Guides', item: new URL('/guides/', Astro.site).href },
+      { '@type': 'ListItem', position: 3, name: guide.data.title, item: pageUrl },
+    ],
+  },
+];
+---
+
+<Base
+  title={guide.data.title}
+  description={guide.data.summary}
+  path={path}
+  ogType="article"
+  published={published}
+  structuredData={structuredData}
+>
+  <DisclosureBanner />
+  <article class="wrap doc">
+    <header class="doc-header">
+      <p class="crumbs">
+        <a href="/guides/">Guides</a>
+        <a href={`/guides/?category=${encodeURIComponent(guide.data.category)}`}>{guide.data.category}</a>
+      </p>
+      <h1>{guide.data.title}</h1>
+      <p class="lede">{guide.data.summary}</p>
+      <p class="byline">
+        Checked <time datetime={published}>{formatDate(guide.data.date)}</time>
+      </p>
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+    {
+      related.length > 0 && (
+        <aside class="related" aria-labelledby="related-heading">
+          <h2 id="related-heading">More guides</h2>
+          <div class="card-grid cols-2">
+            {related.map((item) => (
+              <GuideCard
+                href={guidePath(item.data.slug)}
+                title={item.data.title}
+                summary={item.data.summary}
+                category={item.data.category}
+                dateLabel={formatDate(item.data.date)}
+              />
+            ))}
+          </div>
+        </aside>
+      )
+    }
+  </article>
+</Base>

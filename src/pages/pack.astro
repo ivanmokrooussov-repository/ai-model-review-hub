@@ -1,0 +1,63 @@
+---
+import { getEntry, render } from 'astro:content';
+import { gumroadUrl, isHttpUrl, packName, packPrice } from '../config';
+import Base from '../layouts/Base.astro';
+
+const entry = await getEntry('pages', 'pack');
+if (!entry) throw new Error('Missing content/pages/pack.md');
+const { Content } = await render(entry);
+const linked = isHttpUrl(gumroadUrl);
+---
+
+<Base title={packName} description={entry.data.description} path="/pack/">
+  <div class="wrap">
+    <section class="pack-hero">
+      <img
+        class="cover"
+        src="/images/pack-cover.jpg"
+        width="800"
+        height="1000"
+        alt="Cover of the Starter Pack: prompt workflows and a cost calculator."
+      />
+      <div>
+        <p class="eyebrow">Gumroad download</p>
+        <h1>{packName}</h1>
+        <p class="lede">AI Workflow Pack and LLM cost calculator for everyday work.</p>
+        <p class="price">{packPrice}</p>
+        <a
+          class="button"
+          href={gumroadUrl}
+          rel={linked ? 'sponsored noopener noreferrer' : undefined}
+          target={linked ? '_blank' : undefined}
+        >
+          Buy on Gumroad
+          {linked && <span class="sr-only"> (opens in a new tab)</span>}
+        </a>
+        {
+          linked ? (
+            <p class="fine">Checkout happens on Gumroad. This site never asks for a card number.</p>
+          ) : (
+            <p class="placeholder-note">
+              The buy button points at the placeholder <code>{gumroadUrl}</code>. Replace it in <code>src/config.ts</code>{' '}
+              with your Gumroad link, including <code>https://</code>, before you announce the page.
+            </p>
+          )
+        }
+      </div>
+    </section>
+    <article class="prose">
+      <Content />
+    </article>
+    <p>
+      <a
+        class="button"
+        href={gumroadUrl}
+        rel={linked ? 'sponsored noopener noreferrer' : undefined}
+        target={linked ? '_blank' : undefined}
+      >
+        Buy on Gumroad — {packPrice}
+        {linked && <span class="sr-only"> (opens in a new tab)</span>}
+      </a>
+    </p>
+  </div>
+</Base>

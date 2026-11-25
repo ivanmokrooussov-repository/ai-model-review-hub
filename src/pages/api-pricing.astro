@@ -1,0 +1,174 @@
+---
+import Base from '../layouts/Base.astro';
+import { formatDate, formatNumber, formatRate, formatUsd } from '../lib/format';
+import {
+  exampleWorkload,
+  modelsByCost,
+  pricingChecked,
+  providers,
+  tierLabel,
+} from '../lib/pricing';
+
+const checkedLabel = formatDate(new Date(`${pricingChecked}T00:00:00Z`));
+const ranked = modelsByCost(exampleWorkload);
+const cheapest = ranked[0];
+const description =
+  'Estimate monthly LLM API cost from November 2026 list prices. Adjust requests and token counts in your browser. Nothing is uploaded.';
+
+const workloadText = `${formatNumber(exampleWorkload.requests)} requests, ${formatNumber(exampleWorkload.inputTokens)} input tokens, and ${formatNumber(exampleWorkload.outputTokens)} output tokens each. Cached input is not included.`;
+---
+
+<Base title="API Cost Table" description={description} path="/api-pricing/">
+  <div
+    class="wrap doc"
+    data-pricing
+    data-default-requests={exampleWorkload.requests}
+    data-default-input={exampleWorkload.inputTokens}
+    data-default-output={exampleWorkload.outputTokens}
+  >
+    <header class="doc-header">
+      <p class="eyebrow">Checked {checkedLabel}</p>
+      <h1>API Cost Table</h1>
+      <p class="lede">
+        A live estimator for 2026 LLM API list prices. Change the workload below. The math runs in your browser, and
+        nothing you type is uploaded.
+      </p>
+    </header>
+
+    <div class="calc-grid">
+      <label class="field">
+        <span>Requests per month</span>
+        <input
+          id="requests"
+          data-requests
+          type="number"
+          inputmode="numeric"
+          min="0"
+          max="1000000"
+          step="1"
+          value={exampleWorkload.requests}
+        />
+        <input data-requests-range type="range" min="0" max="20000" step="100" value={exampleWorkload.requests} aria-label="Requests per month slider" />
+      </label>
+      <label class="field">
+        <span>Average input tokens</span>
+        <input
+          data-input-tokens
+          type="number"
+          inputmode="numeric"
+          min="0"
+          max="1000000"
+          step="1"
+          value={exampleWorkload.inputTokens}
+        />
+        <input data-input-range type="range" min="0" max="20000" step="100" value={exampleWorkload.inputTokens} aria-label="Average input tokens slider" />
+      </label>
+      <label class="field">
+        <span>Average output tokens</span>
+        <input
+          data-output-tokens
+          type="number"
+          inputmode="numeric"
+          min="0"
+          max="1000000"
+          step="1"
+          value={exampleWorkload.outputTokens}
+        />
+        <input data-output-range type="range" min="0" max="8000" step="50" value={exampleWorkload.outputTokens} aria-label="Average output tokens slider" />
+      </label>
+    </div>
+    <div class="calc-actions">
+      <button class="reset-btn" type="button" data-reset>Reset to the guide example</button>
+      <a href="/guides/cheapest-llm-apis-compared-2026/">Read the full pricing guide</a>
+    </div>
+    <p data-workload-summary>{workloadText}</p>
+    <p class="cheapest" data-cheapest>
+      Lowest estimate in this view: {cheapest.name} at {formatUsd(cheapest.total)} per month.
+    </p>
+
+    <div class="filters" role="group" aria-label="Filter by provider">
+      <button class="filter-btn" type="button" data-filter="provider" data-value="all" aria-pressed="true">All providers</button>
+      {
+        providers.map((provider) => (
+          <button class="filter-btn" type="button" data-filter="provider" data-value={provider} aria-pressed="false">
+            {provider}
+          </button>
+        ))
+      }
+    </div>
+    <div class="filters" role="group" aria-label="Filter by tier">
+      <button class="filter-btn" type="button" data-filter="tier" data-value="all" aria-pressed="true">All tiers</button>
+      <button class="filter-btn" type="button" data-filter="tier" data-value="budget" aria-pressed="false">Budget & mid-tier</button>
+      <button class="filter-btn" type="button" data-filter="tier" data-value="flagship" aria-pressed="false">Flagship</button>
+    </div>
+
+    <p class="swipe-hint">Swipe sideways to see every column.</p>
+    <div class="table-wrap" tabindex="0">
+      <table class="price-table">
+        <caption class="sr-only">
+          API list prices per 1 million tokens and an estimated monthly cost for the workload above. Checked {checkedLabel}.
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Model</th>
+            <th scope="col">Provider</th>
+            <th scope="col">Tier</th>
+            <th scope="col">Input / 1M</th>
+            <th scope="col">Cached input / 1M</th>
+            <th scope="col">Output / 1M</th>
+            <th scope="col">Est. monthly</th>
+            <th scope="col">Notes</th>
+          </tr>
+        </thead>
+        <tbody data-price-body>
+          {
+            ranked.map((model) => (
+              <tr
+                data-row
+                data-provider={model.provider}
+                data-tier={model.tier}
+                data-name={model.name}
+                data-input={model.inputPerMillion}
+                data-output={model.outputPerMillion}
+                data-total={model.total}
+              >
+                <th class="mono" scope="row">{model.name}</th>
+                <td>{model.provider}</td>
+                <td>{tierLabel[model.tier]}</td>
+                <td class="num">{formatRate(model.inputPerMillion)}</td>
+                <td class="num">{formatRate(model.cachedInputPerMillion)}</td>
+                <td class="num">{formatRate(model.outputPerMillion)}</td>
+                <td class="num monthly" data-monthly>
+                  {formatUsd(model.total)}
+                </td>
+                <td>{model.notes}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+    <p class="empty" data-empty hidden>No models match these filters.</p>
+
+    <details class="formula">
+      <summary>How the monthly estimate is calculated</summary>
+      <p>
+        Monthly cost = (requests × average input tokens ÷ 1,000,000 × input price) + (requests × average output tokens
+        ÷ 1,000,000 × output price).
+      </p>
+      <p>
+        The starting numbers match the pricing guide: 1,000 requests, 1,500 input tokens, and 500 output tokens, with
+        no prompt caching. Reasoning models can bill hidden reasoning tokens as output. Long prompts can jump to a
+        higher rate, and those cliffs are in the notes column. How the prices were checked is on the
+        <a href="/methodology/">methodology page</a>.
+      </p>
+    </details>
+  </div>
+</Base>
+
+<script>
+  import { initPricingCalculator } from '../scripts/api-pricing';
+
+  const root = document.querySelector<HTMLElement>('[data-pricing]');
+  if (root) initPricingCalculator(root);
+</script>

@@ -1,0 +1,44 @@
+---
+import { footerExplore, footerTrust, siteName, tagline } from '../config';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <h2>{siteName}</h2>
+      <p>{tagline}</p>
+    </div>
+    <div>
+      <h2>Explore</h2>
+      <ul>
+        {
+          footerExplore.map((item) => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div>
+      <h2>Trust</h2>
+      <ul>
+        {
+          footerTrust.map((item) => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+  <div class="wrap">
+    <p class="legal">
+      © {year} {siteName}. Prices and plan limits change — each guide shows the date it was checked. No tracking
+      scripts.
+    </p>
+  </div>
+</footer>

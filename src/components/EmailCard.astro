@@ -1,0 +1,17 @@
+---
+import { contactEmail, emailIsPlaceholder } from '../config';
+
+const href = `mailto:${contactEmail}?subject=${encodeURIComponent('AI Model & Tool Review Hub')}`;
+---
+
+<div class="email-card">
+  <p class="eyebrow">Email</p>
+  <a class="email-address" href={href}>{contactEmail}</a>
+  {
+    emailIsPlaceholder && (
+      <p class="placeholder-note">
+        This address ends in example.com, so it is a stand-in. Put your real email in <code>src/config.ts</code>.
+      </p>
+    )
+  }
+</div>
