@@ -1,5 +1,5 @@
 ---
-import { footerExplore, footerTrust, siteName, tagline } from '../config';
+import { footerExplore, footerTrust, gumroadUrl, packPrice, siteName, tagline } from '../config';
 
 const year = new Date().getFullYear();
 ---
@@ -20,6 +20,12 @@ const year = new Date().getFullYear();
             </li>
           ))
         }
+        <li>
+          <a href={gumroadUrl} rel="sponsored noopener noreferrer" target="_blank">
+            Buy on Gumroad — {packPrice}
+            <span class="sr-only"> (opens in a new tab)</span>
+          </a>
+        </li>
       </ul>
     </div>
     <div>

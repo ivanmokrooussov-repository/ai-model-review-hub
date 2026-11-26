@@ -33,4 +33,4 @@ A company does not need an affiliate program to be mentioned. A mention is not a
 
 ## Questions
 
-This page is a plain-language notice, not a legal opinion. To ask whether a specific link is an affiliate link, use the email on the [contact page](/contact/).
+This page is a plain-language notice, not a legal opinion. To ask whether a specific link is an affiliate link, use the [Gumroad profile](https://mokrooussov.gumroad.com).

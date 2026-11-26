@@ -9,7 +9,7 @@ This notice explains what AI Model & Tool Review Hub does with information. It i
 
 ## Who we are
 
-The site is published by Ivan. The email address is on the [contact page](/contact/).
+The site is published by Ivan. This website does not publish an email address. Questions go to the [Gumroad profile](https://mokrooussov.gumroad.com).
 
 ## What this website collects
 
@@ -23,9 +23,9 @@ The site is hosted on Cloudflare Pages. When your browser requests a page, Cloud
 
 We do not use those logs to build a marketing profile, and we do not sell them.
 
-## Email
+## Messages
 
-If you email us, we receive the address you wrote from and whatever you put in the message. We use that to reply and to fix the issue you raised. We do not add you to a mailing list. Please do not send passwords or sensitive documents.
+This site has no email address and no contact form. A note sent through the [Gumroad profile](https://mokrooussov.gumroad.com) is handled by Gumroad under Gumroad's privacy policy. We do not run a mailing list from this website.
 
 ## Payments
 
@@ -55,4 +55,4 @@ If we add analytics, a form, or any other collection later, we will update this 
 
 ## Contact
 
-Privacy questions go to the email on the [contact page](/contact/).
+Privacy questions go to the [Gumroad profile](https://mokrooussov.gumroad.com).

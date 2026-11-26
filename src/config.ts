@@ -1,8 +1,7 @@
 /**
  * Site settings.
- *
- * Change the email, the Gumroad link, and the Starter Pack price here.
- * You do not need to edit the page layout to update those three.
+ * The public site address lives in astro.config.ts. It is used for the sitemap,
+ * canonical links, and Open Graph tags.
  */
 
 export const siteName = 'AI Model & Tool Review Hub';
@@ -14,28 +13,22 @@ export const tagline =
 export const siteDescription =
   'Practical AI model comparisons, free-tier limits, and transparent API cost math for freelancers and small teams.';
 
-/** The address shown on the contact page. Replace hello@example.com. */
-export const contactEmail = 'hello@example.com';
+/** Gumroad profile. Used wherever the site used to offer an email address. */
+export const gumroadProfileUrl = 'https://mokrooussov.gumroad.com';
 
-/**
- * Paste your Gumroad product link between the quotes,
- * replacing [GUMROAD_URL]. Include the https:// part.
- */
-export const gumroadUrl = '[GUMROAD_URL]';
+/** Starter Pack checkout on Gumroad. */
+export const gumroadUrl = 'https://mokrooussov.gumroad.com/l/onkodbc';
 
 /** Shown on the Starter Pack page and the home page. */
-export const packPrice = '$19';
+export const packPrice = '$19 USD';
 
 export const packName = 'Starter Pack';
 
 /**
- * Domains that are affiliate links (for example "partner.example").
+ * Domains that are commercial or affiliate links.
  * Links to these sites are marked rel="sponsored" automatically.
- * Leave the list empty until you add a partner link.
  */
-export const affiliateHosts: string[] = [];
-
-export const emailIsPlaceholder = contactEmail.endsWith('@example.com');
+export const affiliateHosts: string[] = ['gumroad.com'];
 
 export function isHttpUrl(value: string): boolean {
   try {

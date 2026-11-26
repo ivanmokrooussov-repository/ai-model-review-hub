@@ -21,19 +21,19 @@ You do not upload a `dist` folder yourself. Cloudflare creates it by running the
 
 You do not need a credit card for the free Pages plan. The site does not take payments. The Starter Pack button sends people to Gumroad.
 
-### Use your real site address
+### Site address
 
-Open `astro.config.ts`. Replace `https://ai-model-review-hub.pages.dev` with the `https://something.pages.dev` address Cloudflare gave you. Commit that change and push it. The sitemap and the link previews use that address.
+The public address is already set in `astro.config.ts` to `https://ai-model-review-hub.pages.dev`. The sitemap, canonical links, and link previews use that address.
 
 The sitemap is created for you at `/sitemap-index.xml`. Search engines are allowed to read the site via `/robots.txt`. There are no tracking scripts.
 
-## Change the email, the price, or the Gumroad link
+## Price and Gumroad links
 
-Open `src/config.ts`.
+Open `src/config.ts` if these need to change later.
 
-- `contactEmail` — the address on the Contact page. Replace `hello@example.com`.
-- `gumroadUrl` — replace `[GUMROAD_URL]` with your Gumroad product link, including `https://`.
-- `packPrice` — the price shown on the Starter Pack. It is `$19` to start.
+- `gumroadUrl` — Starter Pack checkout. It is `https://mokrooussov.gumroad.com/l/onkodbc`.
+- `gumroadProfileUrl` — where questions go. This site does not publish an email address.
+- `packPrice` — the price shown on the Starter Pack. It is `$19 USD`.
 
 Commit and push. Cloudflare publishes the new version after the build finishes.
 

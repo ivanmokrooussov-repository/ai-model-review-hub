@@ -1,6 +1,6 @@
 ---
 title: "Starter Pack"
-description: "A $19 Gumroad download: everyday AI prompt workflows and an LLM cost calculator spreadsheet for solo operators and small teams."
+description: "A $19 USD Gumroad download: everyday AI prompt workflows and an LLM cost calculator spreadsheet for solo operators and small teams."
 ---
 
 The Starter Pack puts the workflows from this site in one download: prompts you can reuse, a spreadsheet for API bills, and a one-page way to pick a model tier. It is not another chat subscription.

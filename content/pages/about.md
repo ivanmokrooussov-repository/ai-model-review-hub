@@ -11,7 +11,7 @@ How the guides are tested, including AI-assisted drafting and the ban on invente
 
 ## Who runs the site
 
-This site is published by Ivan. There is no staff directory and no account system. Corrections, partnership notes, and privacy questions go to the email on the [contact page](/contact/).
+This site is published by Ivan. There is no staff directory, no account, and no email address on this site. Corrections, partnership notes, and privacy questions go to the [Gumroad profile](https://mokrooussov.gumroad.com).
 
 We are not OpenAI, Anthropic, Google, xAI, DeepSeek, or Perplexity, and we do not speak for them.
 

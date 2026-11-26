@@ -1,11 +1,11 @@
 ---
 title: "Contact"
-description: "Email the publisher of AI Model & Tool Review Hub. There is no form and no account."
+description: "Reach the publisher of AI Model & Tool Review Hub on Gumroad. This site has no email address and no contact form."
 ---
 
-Your email app opens when you use the address above. This page does not store the message, and there is no form to submit.
+The link above opens the Gumroad profile. This page does not send a message by itself, and it does not store one.
 
-Good reasons to write:
+Good reasons to write there:
 
 - A price, plan limit, or source link on a guide looks wrong.
 - You want to know whether a particular link is an affiliate link.
