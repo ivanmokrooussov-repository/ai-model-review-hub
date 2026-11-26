@@ -1,0 +1,118 @@
+---
+import { packPrice, siteDescription, siteName, tagline } from '../config';
+import GuideCard from '../components/GuideCard.astro';
+import Base from '../layouts/Base.astro';
+import { formatDate } from '../lib/format';
+import { getGuides, guidePath } from '../lib/guides';
+import { pricingChecked } from '../lib/pricing';
+
+const guides = await getGuides();
+const checkedLabel = formatDate(new Date(`${pricingChecked}T00:00:00Z`));
+const canonical = new URL('/', Astro.site).href;
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: siteName,
+    description: siteDescription,
+    url: canonical,
+  },
+];
+---
+
+<Base title={siteName} description={siteDescription} path="/" structuredData={structuredData}>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-layout">
+        <div>
+          <p class="eyebrow">For freelancers and small teams</p>
+          <h1>{siteName}</h1>
+          <p class="tagline">{tagline}</p>
+          <p class="support">
+            Clear notes on which assistant to open, what a free plan actually includes, and what an API workflow costs
+            per month. No invented scores.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="/guides/">Browse guides</a>
+            <a class="button secondary" href="/api-pricing/">Estimate API cost</a>
+          </div>
+        </div>
+        <aside class="hero-panel" aria-label="Site snapshot">
+          <div>
+            <span>Guides</span>
+            <strong>{guides.length} comparisons</strong>
+          </div>
+          <div>
+            <span>API prices checked</span>
+            <strong>{checkedLabel}</strong>
+          </div>
+          <div>
+            <span>Starter Pack</span>
+            <strong>{packPrice} on Gumroad</strong>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="value-heading">
+      <h2 id="value-heading">What you can check here</h2>
+      <div class="card-grid cols-3">
+        <a class="value-card" href="/api-pricing/">
+          <span class="pill">Pricing</span>
+          <h3>API cost math you can recompute</h3>
+          <p>List prices per million tokens, plus a calculator that stays in your browser.</p>
+        </a>
+        <a class="value-card" href="/guides/best-free-ai-chat-options-2026/">
+          <span class="pill">Free tiers</span>
+          <h3>What $0 actually includes</h3>
+          <p>Chat limits, missing features, and the cheapest paid step up, checked November 2026.</p>
+        </a>
+        <a class="value-card" href="/guides/">
+          <span class="pill">Email & work</span>
+          <h3>Which assistant to open</h3>
+          <p>Email drafts, tone, and a simple way to match a daily task to a model tier.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="guides-heading">
+      <div class="section-head">
+        <h2 id="guides-heading">Guides</h2>
+        <a href="/guides/">All guides</a>
+      </div>
+      {
+        guides.length === 0 ? (
+          <p class="empty">No guides yet. Add a Markdown file in the content/guides folder.</p>
+        ) : (
+          <div class="card-grid cols-2">
+            {guides.map((guide) => (
+              <GuideCard
+                href={guidePath(guide.data.slug)}
+                title={guide.data.title}
+                summary={guide.data.summary}
+                category={guide.data.category}
+                dateLabel={formatDate(guide.data.date)}
+              />
+            ))}
+          </div>
+        )
+      }
+    </section>
+
+    <section class="cta" aria-labelledby="pack-heading">
+      <img class="cta-cover" src="/images/pack-cover.jpg" width="800" height="1000" alt="" />
+      <div>
+        <p class="eyebrow">Starter Pack · {packPrice}</p>
+        <h2 id="pack-heading">Workflows and a cost calculator, in one download.</h2>
+        <p>
+          Prompt patterns for everyday writing and research checks, plus a spreadsheet to estimate an API bill before
+          you run it. Checkout is on Gumroad.
+        </p>
+        <p class="cta-action">
+          <a class="button" href="/pack/">See the Starter Pack</a>
+        </p>
+      </div>
+    </section>
+  </div>
+</Base>

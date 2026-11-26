@@ -1,0 +1,53 @@
+---
+import GuideCard from '../../components/GuideCard.astro';
+import Base from '../../layouts/Base.astro';
+import { formatDate } from '../../lib/format';
+import { getGuides, guideCategories, guidePath } from '../../lib/guides';
+
+const guides = await getGuides();
+const categories = guideCategories(guides);
+const description =
+  'Browse guides on AI email writing, free chat plans, API prices, and how to pick a model for everyday work.';
+---
+
+<Base title="Guides & Comparisons" description={description} path="/guides/">
+  <div class="wrap doc">
+    <header class="doc-header">
+      <h1>Guides & Comparisons</h1>
+      <p class="lede">
+        Filter by topic. Every guide lists the date its prices and plan limits were checked against official pages.
+      </p>
+    </header>
+    <div class="filters" role="group" aria-label="Filter guides by topic" data-guide-filters>
+      <button class="filter-btn" type="button" data-category="all" aria-pressed="true">All</button>
+      {
+        categories.map((category) => (
+          <button class="filter-btn" type="button" data-category={category} aria-pressed="false">
+            {category}
+          </button>
+        ))
+      }
+    </div>
+    <div class="card-grid cols-2">
+      {
+        guides.map((guide) => (
+          <GuideCard
+            href={guidePath(guide.data.slug)}
+            title={guide.data.title}
+            summary={guide.data.summary}
+            category={guide.data.category}
+            dateLabel={formatDate(guide.data.date)}
+          />
+        ))
+      }
+    </div>
+    <p class="empty" data-empty hidden>No guides in this category yet.</p>
+  </div>
+</Base>
+
+<script>
+  import { initGuideFilter } from '../../scripts/guide-filter';
+
+  const root = document.querySelector<HTMLElement>('[data-guide-filters]');
+  if (root) initGuideFilter(root.parentElement ?? root);
+</script>

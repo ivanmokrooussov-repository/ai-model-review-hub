@@ -1,0 +1,39 @@
+---
+import { siteDescription, siteName, tagline } from '../config';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
+  published?: string;
+}
+
+const { title, description, path, ogType = 'website', noindex = false, published } = Astro.props;
+const canonical = new URL(path, Astro.site);
+const documentTitle = path === '/' ? `${siteName} — Practical AI comparisons` : `${title} · ${siteName}`;
+const image = new URL('/og.png', Astro.site);
+const imageAlt = `${siteName}. ${tagline}`;
+---
+
+<title>{documentTitle}</title>
+<meta name="description" content={description || siteDescription} />
+<link rel="canonical" href={canonical.href} />
+{noindex && <meta name="robots" content="noindex" />}
+<meta property="og:title" content={documentTitle} />
+<meta property="og:description" content={description || siteDescription} />
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonical.href} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:image" content={image.href} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={imageAlt} />
+<meta property="og:locale" content="en_US" />
+{published && <meta property="article:published_time" content={published} />}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={documentTitle} />
+<meta name="twitter:description" content={description || siteDescription} />
+<meta name="twitter:image" content={image.href} />
+<meta name="twitter:image:alt" content={imageAlt} />

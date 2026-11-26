@@ -1,0 +1,18 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  summary: string;
+  category: string;
+  dateLabel: string;
+}
+
+const { href, title, summary, category, dateLabel } = Astro.props;
+---
+
+<a class="guide-card" href={href} data-guide-category={category}>
+  <span class="pill">{category}</span>
+  <h3>{title}</h3>
+  <p>{summary}</p>
+  <span class="meta">Checked {dateLabel}</span>
+</a>
