@@ -4,8 +4,7 @@ import { defineConfig } from 'astro/config';
 import { affiliateHosts } from './src/config';
 import { rehypeExternalLinks, rehypeWrapTables } from './src/lib/rehype';
 
-// Public address of the site. After Cloudflare gives you a name.pages.dev
-// link, replace the address below so the sitemap and link previews match it.
+// Canonical public address. Sitemap, canonical links, and Open Graph tags use this.
 const site = 'https://ai-model-review-hub.pages.dev';
 
 export default defineConfig({

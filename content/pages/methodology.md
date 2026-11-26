@@ -9,7 +9,7 @@ This page is the testing and AI-content disclosure for AI Model & Tool Review Hu
 
 Plan names, free-tier limits, and API prices are taken from the provider's own pricing page, help center, or API documentation. Each guide lists those links and the date we checked them. The launch guides were checked on November 25, 2026.
 
-If a number on this site disagrees with the vendor's current page, trust the vendor page. Then tell us, using the [contact page](/contact/), and we will correct the guide.
+If a number on this site disagrees with the vendor's current page, trust the vendor page. Then tell us on the [Gumroad profile](https://mokrooussov.gumroad.com), and we will correct the guide.
 
 ## AI-assisted editorial testing
 
@@ -35,4 +35,4 @@ API cost examples are arithmetic. The monthly figures use the published price pe
 
 ## Corrections
 
-If you spot a stale price or a broken source link, email the address on the [contact page](/contact/). Include the guide address and the official page you checked.
+If you spot a stale price or a broken source link, write through the [Gumroad profile](https://mokrooussov.gumroad.com). Include the guide address and the official page you checked.

@@ -56,7 +56,8 @@ export function rehypeExternalLinks(hosts: string[] = []) {
       }
 
       const rel = new Set(['noopener', 'noreferrer']);
-      if (sponsored.has(hostname)) rel.add('sponsored');
+      const isSponsored = [...sponsored].some((host) => hostname === host || hostname.endsWith(`.${host}`));
+      if (isSponsored) rel.add('sponsored');
       node.properties = node.properties ?? {};
       node.properties.target = '_blank';
       node.properties.rel = [...rel].join(' ');
